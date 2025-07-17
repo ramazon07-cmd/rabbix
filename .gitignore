@@ -1,0 +1,79 @@
+# Python bytecode fayllari
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual muhit papkasi
+env/
+venv/
+ENV/
+.venv/
+
+# Django / Flask va boshqa SQLite fayllari
+*.sqlite3
+
+# Log fayllari
+*.log
+
+# OS fayllari (Mac, Windows)
+.DS_Store
+Thumbs.db
+
+# IDE va editor fayllari
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# PyCharm
+*.iml
+out/
+
+# Jupyter Notebook checkpointlar
+.ipynb_checkpoints/
+
+# Testlar uchun coverage fayllari
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# MyPy static type checker fayllari
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest fayllari
+.pytest_cache/
+
+# Dist va build fayllari
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Paket fayllari
+*.egg
+*.whl
+
+# Python wheel fayllari
+wheelhouse/
+
+# Virtualbox / Docker fayllari
+.vagrant/
+docker-compose.override.yml
+
+# Secret yoki maxfiy fayllar
+.env
+.env.*
+
+# Boshqa foydali narsalar
+*.bak
+*.swp
+*.tmp
+*.temp

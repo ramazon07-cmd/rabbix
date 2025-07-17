@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+      - ./media:/code/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+      - redis
+  worker:
+    build: .
+    command: celery -A app worker -l info
+    depends_on:
+      - web
+      - redis
+      - rabbitmq
+    environment:
+      - CELERY_BROKER_URL=amqp://rabbitmq
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
