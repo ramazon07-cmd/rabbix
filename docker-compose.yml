@@ -9,6 +9,7 @@ services:
       - ./media:/code/media
     ports:
       - "8000:8000"
+      - "5555:5555"
     depends_on:
       - rabbitmq
       - redis

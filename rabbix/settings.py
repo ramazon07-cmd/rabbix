@@ -39,7 +39,55 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "videos",
     "rest_framework",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Rabbix API',
+    'DESCRIPTION': '''
+🎬 Rabbix is a video-processing system powered by Celery & RabbitMQ.
+
+## 🐇 Message Queue Workflow
+
+When a video is uploaded via the `/api/videos/` endpoint, it triggers an asynchronous Celery task through RabbitMQ:
+
+- **Queue Broker**: `amqp://guest:guest@rabbitmq:5672//`
+- **Result Backend**: Redis
+- **Queue Name**: `celery`
+- **Task**: `process_video(video_id)`
+
+### 🔄 Task Logic:
+
+1. Video status is set to `processing`
+2. Simulated processing delay (15 seconds)
+3. Status is updated to `done`
+4. Email is sent to notify the user: **“Your video is ready!”**
+
+## 🌸 Flower Monitoring
+
+Rabbix includes **Flower**, a web-based tool for monitoring Celery tasks in real time:
+
+- **Access URL**: `http://localhost:5555`
+- **Features**:
+  - View running, scheduled, and completed tasks
+  - Inspect worker status and queue load
+  - Track task success/failure and runtime
+
+This provides a visual dashboard to monitor your asynchronous workflow with ease. 🖥️
+
+---
+
+This makes Rabbix an ideal starter template for asynchronous processing workflows in Django.
+''',
+    'VERSION': '1.0.0',
+}
+
+
 
 CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq:5672//'
 CELERY_RESULT_BACKEND = 'redis://redis:6379/0'

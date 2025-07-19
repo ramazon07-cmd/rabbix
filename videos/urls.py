@@ -6,5 +6,5 @@ router = DefaultRouter()
 router.register('videos', VideoViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
