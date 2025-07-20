@@ -13,9 +13,11 @@ services:
     depends_on:
       - rabbitmq
       - redis
+    env_file:
+      - .env
   worker:
     build: .
-    command: celery -A app worker -l info
+    command: celery -A rabbix worker -l info
     depends_on:
       - web
       - redis
